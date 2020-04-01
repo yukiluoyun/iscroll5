@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>index_new</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/commen.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.search {
+				height: 18.3vw;
+				padding-top: 5vw;
+				position: fixed;
+				left: 0;
+				top: 0;
+				z-index: 3;
+				transition: all .5s;
+			}
+
+			.search>input,
+			.search {
+				width: 100%;
+			}
+
+			.search>input {
+				height: 8.3vw;
+				background: rgba(0, 0, 0, .1) url(images/i-search-ico.png) no-repeat 4.4vw center;
+				background-size: 3.7vw 3.7vw;
+				border-radius: 4.2vw;
+				padding: 0 0 0 10.6vw;
+				color: #fff;
+			}
+
+			.search>input::-webkit-input-placeholder {
+				color: #fff;
+				font-size: 4vw;
+				font-family: NotoSansHans-Regular;
+			}
+
+			.b_sort_list {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 6vw 4.6vw 4vw;
+			}
+
+			.b_sort_list>a {
+				display: block;
+				width: 27.8vw;
+				height: 34.4vw;
+				box-shadow: 0vw 1.9vw 1.9vw 0vw rgba(156, 156, 255, 0.2);
+				border-radius: 3.7vw;
+			}
+
+			.work_act {
+				height: 17vw;
+				margin-bottom: 4vw;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div class="box index">
+			<div class="box">
+				<div class="index_bg voidance_head">
+					<div class="search cur_pad"><input type="text" placeholder="请在此处输入要搜索的内容" id="keywords" /><button type="button">取消</button></div>
+					<div class="b_sort_list">
+						<a href="drug_list_new.html"><img src="images/i-ks-1_02.png"></a>
+						<a href="material_new.html"><img src="images/i-ks-2_02.png"></a>
+						<a href="javascript:void(0);" onclick="goTot()"><img src="images/i-ks-3_02.png"></a>
+					</div>
+				</div>
+				<div class="cur_pad">
+					<div class="swiper-container work_act">
+						<div class="swiper-wrapper" id="workDynamics">
+						</div>
+						<a href="work_act_list_new.html"></a>
+					</div>
+				</div>
+				<div class="index_inner">
+						<div class="index_tabs_row">
+							<div class="index_tabs cur_pad">
+								<ul class="fl">
+									<li class="active" onclick="findMediPurchaseContentByMade()">药品</li>
+									<li onclick="findMedicalSupplies()">医用耗材</li>
+								</ul>
+								<div class="fr">
+									<p class="active" id="p1"></p>
+									<p id="p2"></p>
+								</div>
+							</div>
+							<div class="pro_type cur_pad">
+								<ul class="clearfix active" id="ul1">
+									<li id="ul1Li" class="active" onclick="findMediPurchaseContentByMade()">
+										<div><img src="images/tj_icon.png" alt=""></div>
+										<span>全部</span>
+									</li>
+									<li onclick="findMediPurchaseContentByMade(1)">
+										<div><img src="images/xy_icon.png" alt=""></div>
+										<span>化学药</span>
+									</li>
+									<li onclick="findMediPurchaseContentByMade('0')">
+										<div><img src="images/zy_icon.png" alt=""></div>
+										<span>中成药</span>
+									</li>
+									<li onclick="findMediPurchaseContentByMade(2)">
+										<div><img src="images/swzj_icon.png" alt=""></div>
+										<span>生物制剂</span>
+									</li>
+								</ul>
+								<ul class="clearfix" id="ul2">
+									<li id="ul2Li" class="active" onclick="findMedicalSupplies()">
+										<div><img src="images/qbhc.png"></div>
+										<span>全部</span>
+									</li>
+									<li onclick="findMedicalSupplies('非血管介入治疗材料')">
+										<div><img src="images/sg.png"></div>
+										<span>非血管介入治疗材料</span>
+									</li>
+									<li onclick="findMedicalSupplies('功能性辅料')">
+										<div><img src="images/gnx.png" alt=""></div>
+										<span>功能性辅料</span>
+									</li>
+									<li onclick="findMedicalSupplies('骨科耗材')">
+										<div><img src="images/guhc.png" alt=""></div>
+										<span>骨科耗材</span>
+									</li>
+									<li onclick="findMedicalSupplies('基础卫生材料')">
+										<div><img src="images/jcws.png" alt=""></div>
+										<span>基础卫生材料</span>
+									</li>
+									<li onclick="findMedicalSupplies('介入诊断和治疗产品')">
+										<div><img src="images/jrzd.png" alt=""></div>
+										<span>介入诊断和治疗产品</span>
+									</li>
+									<li onclick="findMedicalSupplies('口腔材料')">
+										<div><img src="images/kqhc.png" alt=""></div>
+										<span>口腔材料</span>
+									</li>
+									<li onclick="findMedicalSupplies('人工器官')">
+										<div><img src="images/rgqg.png"></div>
+										<span>人工器官</span>
+									</li>
+									<li onclick="findMedicalSupplies('神经外科')">
+										<div><img src="images/sjwk.png"></div>
+										<span>神经外科</span>
+									</li>
+									<li onclick="findMedicalSupplies('体外循环及血液净化类')">
+										<div><img src="images/twxh.png"></div>
+										<span>体外循环及血液净化类</span>
+									</li>
+									<li onclick="findMedicalSupplies('吻合器及附件')">
+										<div><img src="images/whq.png"></div>
+										<span>吻合器及附件</span>
+									</li>
+									<li onclick="findMedicalSupplies('眼科类')">
+										<div><img src="images/ykl.png"></div>
+										<span>眼科类</span>
+									</li>
+									<li onclick="findMedicalSupplies('中医类材料')">
+										<div><img src="images/zylcl.png"></div>
+										<span>中医类材料</span>
+									</li>
+									<li onclick="findMedicalSupplies('注射穿刺材料')">
+										<div><img src="images/zscc.png"></div>
+										<span>注射穿刺材料</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="cur_pad box">
+							<div class="type_con box swiper-container">
+								<div class="pro_list_box swiper-wrapper">
+									<div class="pro_list box swiper-slide">
+										<div id="wrapper1">
+											<div class="mater_list" id="scroller1">
+												<div class="pullDown" >
+													<div class="pullDownLabel"></div>
+												</div>
+												<ul id="thelist1" class="clearfix">
+												</ul>
+												<div class="pullUp" >
+													<div class="pullUpLabel">上拉加载更多</div>
+												</div>
+											</div>
+										</div>
+                                        <div class="list_no_data">
+                                            <img src="images/list_no_data.png"style="margin-top:10%;margin-left:0px;">
+                                            <p>很遗憾，无数据</p>
+                                        </div>
+									</div>
+									<div class="pro_list box swiper-slide">
+										<div id="wrapper2">
+											<div class="mater_list" id="scroller2">
+												<div class="pullDown" >
+													<div class="pullDownLabel"></div>
+												</div>
+												<ul id="thelist2" class="clearfix">
+
+												</ul>
+												<div class="pullUp" >
+													<div class="pullUpLabel">上拉加载更多</div>
+												</div>
+											</div>
+										</div>
+                                        <div class="list_no_data">
+                                            <img src="images/list_no_data.png"style="margin-top:10%;margin-left:0px;">
+                                            <p>很遗憾，无数据</p>
+                                        </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="nav">
+			<ul>
+				<li>
+					<a href="javascript:void(0);" class="home active">
+						<div></div>
+						<p>首页</p>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0);" class="buy" onclick="goTot()">
+						<div></div>
+						<p>带量采购</p>
+					</a>
+				</li>
+				<li>
+					<a href="mine_new.html" class="mine">
+						<div></div>
+						<p>我的</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		var keywords = null;
+		//        var ctx = "https://" + window.location.host;
+		var pullUpCount = 1;
+		var totalRecords = 0;
+		var step = 10;
+
+		var orgType = -1;
+		var isLogin = false;
+
+		var myScroll,pullDown,pullUp,pullDownLabel,pullUpLabel,container,loadingStep;
+
+		$(function() {
+			getMine();
+			findMediPurchaseContentByMade();
+
+			//获取门户工作动态
+            getWorkDynamicsInfo();
+            console
+		});
+
+		function getMine() {
+			var url = "/djypcg/api/quantityPurchase/getMine.action";
+			$.ajax({
+				url: ctx + url,
+				type: "get",
+				// contentType: 'application/json;charset=UTF-8',
+				// dataType: 'json',
+				// data: {
+				//     'data': JSON.stringify(param)
+				// },
+				//async: false,
+				beforeSend: function() {
+					loading();
+				},
+				success: function(result) {
+					if (result.code == 200) {
+						orgType = result.data.orgType;
+						isLogin = true;
+						removeLoading();
+					}
+				},
+				error: function(data) {
+					removeLoading();
+					allAlert("请求失败，重新进入页面");
+					return false;
+				}
+			});
+		}
+
+		function goTot() {
+			if (!isLogin) {
+				window.location.href = ctx + "/djypcg/h5/wechat/login_new.html";
+				return;
+			}
+			if (0 != orgType && 3 != orgType) {
+				allAlert("账号无权限");
+				return;
+			}
+			window.location.href = ctx + "/djypcg/h5/wechat/4+7tot_new.html";
+		}
+		//根据0中成药、1化学药、2生物制剂查询药品采购目录数据
+		function findMediPurchaseContentByMade(made,pull) {
+		    var flag=true;
+		    if(pull!=null && pull != ''){
+		        flag=false;
+		       pullUpCount=pull;
+			}else {
+                pullUpCount = 1;
+				myScoll1("#wrapper1");
+			}
+			// var url="/djypcg/api/index/findMediPurchaseContentByMade.action";
+			var url = "/djypcg/api/index/findMediPurchaseContentByMade.action?pageSize="+step + "&pullUpCount=" + pullUpCount;
+
+			if (made != null && made != '') {
+				url += '&medicine_made=' + made;
+			}
+			if (keywords != null && keywords != '') {
+				url += '&keywords=' + keywords;
+			}
+			$.ajax({
+				url: ctx + url,
+				type: "get",
+				// contentType: 'application/json;charset=UTF-8',
+				// dataType: 'json',
+				// data: {
+				//     'data': JSON.stringify(param)
+				// },
+				//async: false,
+				beforeSend: function() {
+					loading();
+				},
+				success: function(result) {
+                    $(".list_no_data").hide();
+                    $("#wrapper1").show();
+					var html = '';
+					if (result.code == 200 && result.data.pageList.length > 0) {
+						console.log("result-----",result);
+						totalRecords = result.data.totalRecords;
+
+						// pullUpCount = result.data.pageList.length;
+						$("#p1").html('共找到' + result.data.totalRecords + '个药品');
+						result.data.pageList.forEach(function(item) {
+							html += '<li class="clearfix">';
+							html += '<a href="javascript:void(0);" onclick="viewMediInfo(' + item.medicine_id + ',' + item.max_price +
+								',' + item.company_name_jk + ')">';
+							html += '<div class="img">';
+							//截取的图片地址
+							var pathNew = '';
+							//图片地址
+							var path = item.wechat_pic_path;
+							if (path == null || path == undefined) {
+								path = '';
+							}
+							// 例如数据库返回 '/data/tomcat/webapps/data/gspInfoUpload/20180716163659945856.jpg'
+							if ('' != path) {
+								//截取掉/data/tomcat/webapps
+								var len = GetLength(path);
+								console.log('获取的字符串长度：' + len);
+								if (len > 20) {
+									pathNew = path.slice(20);
+								} else {
+									pathNew = path;
+								}
+							}
+							html += '<img src="https://yp.jxyycg.cn' + pathNew +
+								'" onerror="this.src=\'images/mr_img.png\'" class="mr_img">';
+							html += '</div><div class="info">';
+							//名称 /数量*规格
+							html += '<h6>' + item.currency_name + '</h6>';
+							var bid = "";
+							var amount = "";
+							var sta = "";
+							if (item.packaging_amount != null) {
+								amount = item.packaging_amount;
+							}
+							if (item.standard != null) {
+								sta = item.standard;
+							}
+							if (item.bid_unit != null) {
+								bid = item.bid_unit;
+							}
+							html += '<h6>' + sta + '*' + amount + bid + '</h6>';
+
+							html += '<p><span>';
+							if (item.max_price != null && item.max_price != '') {
+								html += '<em>¥</em>' + item.max_price;
+							} else {
+								html += '<em>¥</em>暂无';
+							}
+							html += '<img src="images/cgj.png"></span></p>';
+							html += '</div></a></li>';
+						});
+
+						if(flag){
+							$("#thelist1").html(html);
+							pullUp.attr('class', '').hide();
+							loadingStep = 0;
+							myScroll.refresh();
+						}else{
+							$("#thelist1").append(html);
+							pullUp.attr('class', '').hide();
+							loadingStep = 0;
+							myScroll.refresh();
+						}
+						removeLoading();
+					} else {
+						removeLoading();
+						// allAlert("获取数据为空或失败");
+                        $("#wrapper1").hide();
+                        $(".list_no_data").show();
+						return;
+					}
+				},
+				error: function(data) {
+					removeLoading();
+					allAlert("请求失败，重新进入页面");
+					return false;
+				}
+			});
+		}
+
+		var medicalFlag = 0;
+
+		function findMedicalSupplies(two_level,pull) {
+		    var flag=true;
+            if(pull!=null && pull != ''){ //说明第二个参数有值，也间接说明不是从搜索，或者大类Li里点击的，而是从每个小类li点击的
+                flag=false;
+                pullUpCount=pull;
+            }else { //首次加载，时
+                pullUpCount = 1;
+				myScoll1("#wrapper2");
+            }
+			var url = "/djypcg/api/medicalSupplies/list.action?pageSize="+step + "&pullUpCount=" + pullUpCount;
+			if (two_level != null && two_level != '') {
+				url += '&two_level=' + two_level;
+			}
+			if (keywords != null && keywords != '') {
+				url += '&keywords=' + keywords;
+			}
+
+			$.ajax({
+				url: ctx + url,
+				type: "get",
+				// contentType: 'application/json;charset=UTF-8',
+				// dataType: 'json',
+				// data: {
+				//     'data': JSON.stringify(param)
+				// },
+				//async: false,
+				beforeSend: function() {
+					loading();
+				},
+				success: function(result) {
+                    $(".list_no_data").hide();
+                    $("#wrapper2").show();
+					var html = '';
+					if (result.code == 200 && result.data.pageList != null && result.data.pageList.length > 0) {
+						$("#p2").html('共找到' + result.data.totalRecords + '个医用耗材');
+						result.data.pageList.forEach(function(item) {
+							html += '<li class="clearfix">';
+							html += '<a href="javascript:void(0);" onclick="viewMedicalSupplies(' + item.id + ')">';
+							html += '<div class="img">';
+							html += '<img src="https://hc.jxyycg.cn/data/' + item.tpcclj +
+								'"  onerror="this.src=\'images/mr_img.png\'" class="mr_img">';
+							html += '</div><div class="info">';
+							html += '<h6>' + item.five_level + '</h6>';
+							//型号
+							var prodmodelset = "";
+							if (item.prodmodelset != null && item.prodmodelset != '') {
+								prodmodelset = item.prodmodelset;
+							}
+							//规格
+							var prodspecset = "";
+							if (item.prodspecset != null && item.prodspecset != '') {
+								prodspecset = item.prodspecset;
+							}
+							html += '<h6>' + prodmodelset + '*' + prodspecset + '</h6>';
+
+							html += '<p><span>';
+							if (item.ckj != null && item.ckj != '') {
+								html += '<em>¥</em>' + item.ckj;
+							} else {
+								html += '<em>¥</em>暂无';
+							}
+							html += '<img src="images/ckj.png"></span></p>';
+							html += '</div></a></li>';
+						});
+
+						if(flag){
+							$("#thelist2").html(html);
+							pullUp.attr('class', '').hide();
+							loadingStep = 0;
+							myScroll.refresh();
+						}else{
+							$("#thelist2").append(html);
+							pullUp.attr('class', '').hide();
+							loadingStep = 0;
+							myScroll.refresh();
+						}
+						medicalFlag = 1;
+						removeLoading();
+					} else {
+						removeLoading();
+						// allAlert("获取数据为空或失败");
+                        $("#wrapper2").hide();
+                        $(".list_no_data").show();
+						return;
+					}
+				},
+				error: function(data) {
+					removeLoading();
+					allAlert("请求失败，重新进入页面");
+					return false;
+				}
+			});
+		}
+
+		//跳转药品详情页面
+		function viewMediInfo(medicine_id, cgj, company_name_jk) {
+			window.location.href = ctx + "/djypcg/h5/wechat/drug_info_new.html?medicineId=" + medicine_id + "&cgj=" + cgj +
+				"&companyNameJk=" + company_name_jk;
+		}
+
+		//跳转药品详情页面
+		function viewMedicalSupplies(id) {
+			window.location.href = ctx + "/djypcg/h5/wechat/material_info_new.html?id=" + id;
+		}
+
+		//获取工作动态首页权重最大并且最新的一条,改为7条数据滚动
+		function getWorkDynamicsInfo() {
+			var url = "/djypcg/api/workDynamics/findWorkDyanamicsList.action";
+			//工作动态首页请求参数(查询全部),不分页
+			// var param = "{\"flag\":\"0\",\"pullUpCount\":\"\"}";
+
+			var param = {
+				"flag": "0",
+				"pullUpCount": ""
+			};
+			$.ajax({
+				url: ctx + url,
+				type: "POST",
+				async: true,
+				contentType: 'application/json;charset=UTF-8',
+				data: JSON.stringify(param),
+				dataType: 'json',
+				beforeSend: function() {
+					loading();
+				},
+				success: function(result) {
+					// console.log("获取的详情：" + result.data);
+					//返回的json数据转换成对象
+					var resData = JSON.parse(result.data);
+					//json对象里面的data
+					if(resData == null){
+                        removeLoading();
+                        return;
+					}
+					var resdataNew = resData.data;
+					console.log("获取的data详情：" + resdataNew);
+					var html = '';
+					var resCode = resdataNew.resCode;
+					if (result.code == 200 && (resCode == 200) && resdataNew.resMessage.list.length > 0) {
+						//取第一条数据,7条数据滚动
+						// var item = resdataNew.resMessage.list[0];
+						var html = '';
+						var index = 0;
+						resdataNew.resMessage.list.forEach(function(item) {
+							if (index < 7) {
+								html += '<div class="swiper-slide">\n<div>';
+								//工作动态更新时间
+								var updateDate = (new Date()).pattern("yyyy-MM-dd");
+								if (item != null && (item.updateDate != null) && '' != item.updateDate) {
+									// updateDate = new Date(item.updateDate).pattern("yyyy-MM-dd");
+									updateDate = formatDate(item.updateDate, "yyyy-MM-dd");
+								}
+								//工作动态标题,超过24个汉字,48个字节数,就截取,显示...
+								var title = '暂无';
+								if (item != null && (item.title != null) && '' != item.title) {
+									title = item.title;
+									if (GetLength(title) > 49) {
+										title = cutstr(title, 49);
+									}
+								}
+								html += '<a href="#work_act_info.html" onclick="viewWorkDynaInfo(\''+item.id+'\',\''+item.category.id+'\')">' + title + '<span> ' + updateDate + '</span></a>\n';
+								html += '</div></div>';
+								//更新index
+								index++;
+							} else {
+								return;
+							}
+						});
+						$("#workDynamics").html(html);
+						removeLoading();
+                        var swiper = new Swiper('.work_act', {
+                            direction: 'vertical',
+                            autoplay: 5000
+                        });
+					} else {
+						removeLoading();
+						allAlert("获取数据为空或失败");
+						return;
+					}
+				},
+				error: function(data) {
+					removeLoading();
+					allAlert("请求失败，重新进入页面");
+					return false;
+				}
+			});
+		}
+
+        //跳转工作动态详情页面
+        function viewWorkDynaInfo(content_id, category_id){
+            window.location.href = ctx + "/djypcg/h5/wechat/work_act_info_new.html?contentId="+content_id+"&categoryId="+category_id;
+        }
+
+		$(".search>input").keypress(function(e) {
+			if (e.keyCode == 13) {
+				keywords = $("#keywords").val();
+				if (keywords != null && keywords != '') {
+					if ($("#ul1").hasClass("active")) {
+						$("#ul1Li").addClass('active').siblings().removeClass('active');
+						findMediPurchaseContentByMade();
+					}
+					if ($("#ul2").hasClass("active")) {
+						$("#ul2Li").addClass('active').siblings().removeClass('active');
+						findMedicalSupplies();
+					}
+				}
+			}
+		});
+		//小类切换
+		$(".pro_type li").click(function() {
+			var index = $(this).index();
+			var Oparent = $(this).parent();
+			Oparent.find('li').eq(index).addClass('active').siblings().removeClass('active');
+		});
+		//大类切换
+		$(".index_tabs li").click(function() {
+			var index = $(this).index();
+			swiper1.slideTo(index);
+		})
+		//滑动悬浮
+		var vw = $(window).width() / 100;
+		var plchstyle = '<style class="plchstyle">.search>input::-webkit-input-placeholder {color: #999;}</style>'
+
+		$(".index").scroll(function() {
+			if ($(this).scrollTop() < 2 * vw) {
+				$(".search").css('backgroundColor', '');
+				$(".search>input").css({
+					'backgroundColor': '',
+					'color': '',
+					'backgroundImage': ''
+				});
+				$(".plchstyle").remove();
+			} else {
+				$(".search").css('backgroundColor', '#157AE2');
+				$(".search>input").css({
+					'backgroundColor': '#fff',
+					'color': '#484848',
+					'backgroundImage': 'url(images/head_search_03.png)'
+				});
+				if (!$(".plchstyle").length) {
+					$('head').append(plchstyle)
+				}
+			}
+			if ($(".index_inner").offset().top <= $(".search").outerHeight()) {
+				$(".index_tabs_row").css({
+					'position': 'fixed',
+					'top': $(".search").outerHeight()
+				})
+			} else {
+				$(".index_tabs_row").css({
+					'position': '',
+					'top': ''
+				})
+			}
+		})
+
+		// $(".pro_list_box>.pro_list").eq(0).show().siblings().hide();
+
+		var swiper1 = new Swiper('.type_con', {
+			autoHeight: true,
+			onSlideChangeEnd: function(e) {
+				$(".index_tabs li").eq(e.activeIndex).addClass('active').siblings().removeClass('active');
+				$(".index_tabs").find('div>p').eq(e.activeIndex).addClass('active').siblings().removeClass('active');
+				$(".pro_type>ul").eq(e.activeIndex).addClass('active').siblings().removeClass('active');
+				if (e.activeIndex == 1 && medicalFlag == 0) {
+					findMedicalSupplies();
+				}
+			}
+		});
+
+
+		//上拉刷新下拉加载
+		function myScoll1(wrapper){
+			container = $(wrapper).find(".mater_list").find('ul');
+			pullDown = container.prev("div");
+			pullUp = container.next("div");
+			pullDownLabel = pullDown.find(".pullDownLabel");
+			pullUpLabel = pullUp.find(".pullUpLabel");
+			loadingStep = 0; //加载状态0默认，1显示加载状态，2执行加载数据，只有当为0时才能再次加载，这是防止过快拉动刷新
+			pullDown.hide();
+			pullUp.hide();
+			myScroll = new IScroll(wrapper, {
+				click: true,
+				scrollbars: true,
+				mouseWheel: true,
+				interactiveScrollbars: true,
+				shrinkScrollbars: 'scale',
+				fadeScrollbars: true,
+				scrollY: true,
+				probeType: 2,
+				bindToWrapper: true
+			});
+
+			myScroll.on("scroll", function() {
+				if (loadingStep == 0 && !pullDown.attr("class").match('refresh|loading') && !pullUp.attr("class").match('refresh')) {
+					if (this.y > 40) { //表示由上到下拉动，越往下数字越大，起始点为0
+						console.log("this.y > 40");
+					} else if (this.y <= (this.maxScrollY - 20)) { //上拉加载更多 --表示由下到上拉动，越往上数字负的越大，起始点为0
+						pullUp.addClass("refresh").show();
+						loadingStep = 1;
+						pullUpAction();
+					}
+				}
+			});
+			myScroll.on("scrollEnd", function() {
+				if (loadingStep == 1) {
+					if (pullDown.attr("class").match("refresh")) { //下拉刷新操作
+						pullDown.removeClass("refresh").addClass("loading");
+						loadingStep = 2;
+					}
+				}
+			});
+
+			function pullUpAction() {
+				setTimeout(function() {
+					if(totalRecords-pullUpCount*step<=0){
+						pullUp.attr('class', '').hide();
+						myScroll.refresh();
+						loadingStep = 0;
+						allAlert("已全部加载");
+						return;
+					}
+					pullUpCount++;
+
+                    if($(".index_tabs ul li").eq(0).hasClass("active")){//第一个外部导航，即“药品”为当前选中状态
+						$("#ul1 li").each(function(ul1Index,ul1El){
+                            if($(ul1El).hasClass("active")){
+                                if(ul1Index == 0){
+                                    findMediPurchaseContentByMade('',pullUpCount);
+                                }else if(ul1Index == 1){
+                                    findMediPurchaseContentByMade(1,pullUpCount);
+                                }else if(ul1Index == 2){
+                                    findMediPurchaseContentByMade('0',pullUpCount);
+                                }else if(ul1Index == 3){
+                                    findMediPurchaseContentByMade(2,pullUpCount);;
+                                }
+                            }
+                        })
+
+                    }else{//第一个外部导航，即“医用耗材”为当前选中状态
+						var array=new Array("","非血管介入治疗材料",
+						"功能性辅料","骨科耗材","基础卫生材料","介入诊断和治疗产品",
+						"口腔材料","人工器官","神经外科","体外循环及血液净化类",
+						"吻合器及附件","眼科类","中医类材料","注射穿刺材料"
+						);
+                        $("#ul2 li").each(function(ul2Index,ul2El){
+                            if($(ul2El).hasClass("active")){
+								findMedicalSupplies(array[ul2Index],pullUpCount);
+                            }
+                        })
+                    }
+				}, 1000);
+			}
+		}
+
+		document.addEventListener('touchmove', function(e) {
+			e.preventDefault();
+		}, false);
+
+
+	</script>
+</html>
